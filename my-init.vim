@@ -1,0 +1,170 @@
+" -----------------------------------------------------------------------------
+"
+" Neovim Basic Configuration
+"
+" -----------------------------------------------------------------------------
+set ruler                           " set a red ruler
+set exrc                            
+" set guicursor
+set relativenumber                  " turn on relativenumber
+set nu                              " turn on line number
+set nohlsearch
+set hidden
+set noerrorbells
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+set nobackup
+set incsearch
+set colorcolumn=80
+set signcolumn=yes
+set linebreak
+set incsearch
+set nocompatible
+set wildmenu                        " Display all the files when we tab complete
+set so=10                           " Set 10 lines to the cursor - when moving vertically using j/k
+set magic                           " For regular expressions turn magic on
+set path+=**                        " use :find file_name to find the file in the sub dirtory you 
+                                    " currenctly in search down into the subfolders
+                                    " Provide tab-completion for all file-related tasks
+                                    
+set mouse=a                        " turn on mouse in the command line
+"set cursorline                     " Highlight cursor line underneath the cursor horizontally.
+"set cursorcolumn                   " Highlight cursor line underneath the cursor vertically.
+
+syntax enable
+filetype plugin on
+
+
+" -----------------------------------------------------------------------------
+" 
+" Neovim Interface And Split Control
+"
+" -----------------------------------------------------------------------------
+set splitbelow splitright           " set the split to blow and right(defalut is top and right)
+
+" remap split navgation; set change split to ctrl + hjkl (defalut is ^w + hjkl)
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-l> <C-w>l
+noremap <C-k> <C-w>k
+
+" ^w= make two pannal to be equal size
+" :resize +/-number to make the pannal to grow/shink the number of the line
+" Make adjusting split size a bite more using arrow key
+noremap <silent> <C-Left> :vertical resize +2<CR>
+noremap <silent> <C-Right> :vertical resize -2<CR>
+noremap <silent> <C-Up> :resize +2<CR>
+noremap <silent> <C-Down> :resize -2<CR>
+
+
+"set fillchars+=vert:\|             " make the split line to a solid line
+
+
+" -----------------------------------------------------------------------------
+"
+" Neovim Plugins
+"
+" -----------------------------------------------------------------------------
+" usage:
+" ```
+" call plug#begin('the path of the plug file')
+" Plug 'plug's_author's_name/plug's_name'
+" 
+" ** Example **
+" Plug 'terryma/vim-multiple-cursors'
+
+" call plug#end()
+" ```
+
+call plug#begin('~/local/share/nvim/plugged')
+
+Plug 'dracula/vim'
+Plug 'dyng/ctrlsf.vim'
+Plug 'honza/vim-snippets'
+Plug 'itchyny/lightline.vim'
+Plug 'itchyny/vim-gitbranch'
+Plug 'junegunn/fzf',{'dir':'~/.fzf','do':'./install -all'}
+Plug 'junegunn/fzf.vim'
+Plug 'mattn/emmet-vim'
+Plug 'mhinz/vim-startify'
+Plug 'neoclide/coc.nvim', { 'branch': 'release'}
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'pangloss/vim-javascript'
+Plug 'preservim/nerdcommenter'
+Plug 'preservim/nerdtree'
+Plug 'ryanoasis/vim-devicons'
+Plug 'sbdchd/neoformat'
+Plug 'SirVer/ultisnips'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'neovim/nvim-lspconfig'
+"Plug 'ycm-core/YouCompleteMe'
+
+
+Plug 'HerringtonDarkholme/yats.vim'
+" Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+" For async completion
+" Plug 'Shougo/deoplete.nvim'
+" For Denite features
+Plug 'Shougo/denite.nvim'
+
+
+call plug#end()
+
+" -----------------------------------------------------------------------------
+"
+" Neovim Plugins Configuration
+"
+" -----------------------------------------------------------------------------
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical"
+let g:user_emmet_leader_key='<C-,>'
+
+
+" save and format the code
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
+
+
+" leader key is space  
+let mapleader = "\<Space>"
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" Using Lua functions
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+
+
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gh     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gH    <cmd>:Telescope lsp_code_actions<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+"nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gR    <cmd>lua vim.lsp.buf.rename()<CR>
+
+" Enable deoplete at startup
+  let g:deoplete#enable_at_startup = 1
+
+
+
+
+
+
+
+
