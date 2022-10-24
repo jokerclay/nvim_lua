@@ -13,4 +13,4 @@ require("clay.plugins.lsp.null-ls")
 require("clay.plugins.autoparis")
 require("clay.plugins.treesitter")
 require("clay.plugins.gitsigns")
-
+require("clay.plugins.toggleterm")

@@ -37,6 +37,7 @@ syntax enable
 filetype plugin on
 
 
+
 " -----------------------------------------------------------------------------
 " 
 " Neovim Interface And Split Control
